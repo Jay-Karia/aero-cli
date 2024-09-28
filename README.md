@@ -1,6 +1,6 @@
 # ⛅ Aero CLI
 
-![Banner](public/banner.png)
+<img src="./public/banner.png" alt="PigmentTS Banner" style="width: 100%">
 
 Your personal breeze of weather insights. Stay informed with real-time updates and forecasts at your terminal.
 
