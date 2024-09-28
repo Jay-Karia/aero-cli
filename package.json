@@ -1,32 +1,38 @@
 {
-    "name": "aero-cli",
-    "version": "1.0.0",
-    "description": "⛅ Weather updates right in your terminal",
-    "main": "./dist/index.js",
-    "bin": {
-        "aero": "./dist/index.js"
-    },
-    "type": "module",
-    "scripts": {
-        "dev": "tsc -w",
-        "build": "tsc",
-        "lint": "npx eslint ./src/**/*",
-        "format": "npx prettier . --write"
-    },
-    "keywords": [
-        "weather",
-        "cli",
-        "typescript"
-    ],
-    "author": "Jay-Karia",
-    "license": "ISC",
-    "devDependencies": {
-        "@eslint/js": "^9.11.1",
-        "@types/node": "^22.7.4",
-        "eslint": "^9.11.1",
-        "globals": "^15.9.0",
-        "prettier": "3.3.3",
-        "typescript": "^5.6.2",
-        "typescript-eslint": "^8.7.0"
-    }
+  "name": "aero-cli",
+  "version": "1.0.0",
+  "description": "⛅ Weather updates right in your terminal",
+  "main": "./dist/index.js",
+  "bin": {
+    "aero": "./dist/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc",
+    "lint": "npx eslint ./src/**/*",
+    "format": "npx prettier . --write"
+  },
+  "keywords": [
+    "weather",
+    "cli",
+    "typescript"
+  ],
+  "author": "Jay-Karia",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@types/figlet": "^1.5.8",
+    "@types/node": "^22.7.4",
+    "eslint": "^9.11.1",
+    "globals": "^15.9.0",
+    "prettier": "3.3.3",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.7.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "figlet": "^1.7.0"
+  }
 }

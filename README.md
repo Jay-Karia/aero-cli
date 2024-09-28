@@ -1,4 +1,4 @@
-# ⛅ Aero CLI
+# ⛅ AeroCLI
 
 <img src="./public/banner.png" alt="PigmentTS Banner" style="width: 100%">
 
