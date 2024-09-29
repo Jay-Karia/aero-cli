@@ -10,8 +10,8 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "lint": "npx eslint ./src/**/*",
-    "format": "npx prettier . --write"
+    "lint": "pnpm dlx eslint ./src/**/*",
+    "format": "pnpm dlx prettier . --write"
   },
   "keywords": [
     "weather",
@@ -33,6 +33,7 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
     "figlet": "^1.7.0"
   }
 }

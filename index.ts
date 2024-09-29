@@ -2,9 +2,11 @@
 
 import figlet from 'figlet'
 import { Command } from 'commander'
-import currentWeather from './lib/current.js'
+import { currentWeather } from './lib/current.js'
+import * as dotenv from 'dotenv'
 
 const program = new Command()
+dotenv.config()
 
 program
   .name('aero')
