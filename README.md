@@ -1,8 +1,10 @@
 # ⛅ AeroCLI
 
-<img src="./public/banner.png" alt="PigmentTS Banner" style="width: 100%">
+<img src="./public/banner.png" alt="AeroCLI Banner" style="width: 100%">
 
 Your personal breeze of weather insights. Stay informed with real-time updates and forecasts at your terminal.
+
+---
 
 ### 🚀 Coming Soon
 

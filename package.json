@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "lint": "pnpm dlx eslint ./src/**/*",
+    "lint": "pnpm dlx eslint .",
     "format": "pnpm dlx prettier . --write"
   },
   "keywords": [

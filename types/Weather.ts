@@ -15,7 +15,6 @@ interface Main {
 
 interface Wind {
   speed: number
-  deg: number
 }
 
 interface Sys {

@@ -2,7 +2,7 @@
 
 import figlet from 'figlet'
 import { Command } from 'commander'
-import { currentWeather } from './lib/current.ts'
+import { currentWeather } from './lib/current.js'
 import * as dotenv from 'dotenv'
 
 const program = new Command()
@@ -13,7 +13,7 @@ program
   .version('1.0.0')
   .description('⛅ Weather updates right in your terminal')
   .action(() => {
-    console.log(figlet.textSync('Aero', { horizontalLayout: 'full' }))
+    console.log(figlet.textSync('⛅ Aero', { horizontalLayout: 'full' }))
     program.help()
   })
 
@@ -27,9 +27,10 @@ program
     'Set temperature unit (celsius or fahrenheit)',
     'celsius'
   )
+  .option('-t, --temperature', 'Display only the temperature data')
   .action((options) => {
-    const { location, unit } = options
-    currentWeather({ location, unit })
+    const { location, unit, temperature } = options
+    currentWeather({ location, unit, temperature })
   })
 
 program.parse(process.argv)

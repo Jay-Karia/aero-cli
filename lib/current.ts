@@ -7,11 +7,13 @@ import { parseCurrentWeather } from '../utils/parseData.js'
 type CurrentWeatherOptions = {
   location: string
   unit: Unit
+  temperature?: boolean
 }
 
 export async function currentWeather({
   location,
   unit,
+  temperature,
 }: CurrentWeatherOptions) {
   // Check if the location is provided
   if (!location) {
@@ -28,6 +30,7 @@ export async function currentWeather({
     process.exit(1)
   }
 
+  // Map the unit to the API unit
   const parsedUnit =
     unit === 'f' ? 'fahrenheit' : unit === 'c' ? 'celsius' : unit
   const apiUnit = apiUnitMap[parsedUnit]
@@ -44,7 +47,7 @@ export async function currentWeather({
       process.exit(1)
     }
 
-    console.log(parseCurrentWeather(data))
+    console.log(parseCurrentWeather(data, temperature))
   } catch {
     console.error(chalk.red('Error: Unable to fetch weather data.'))
   }
