@@ -1,7 +1,7 @@
 import { Unit } from '../types/Unit.js'
 import chalk from 'chalk'
 import { apiUnitMap } from '../constants/index.js'
-import {WeatherResponse} from '../types/Weather.js'
+import { WeatherResponse } from '../types/Weather.js'
 import { parseCurrentWeather } from '../utils/parseData.js'
 
 type CurrentWeatherOptions = {
@@ -37,7 +37,7 @@ export async function currentWeather({
 
   try {
     const response = await fetch(API_URL)
-    const data = await response.json() as WeatherResponse
+    const data = (await response.json()) as WeatherResponse
 
     if (data.cod === '404') {
       console.error(chalk.red('Error: Location not found.'))

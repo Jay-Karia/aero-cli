@@ -1,5 +1,5 @@
-import {WeatherResponse} from "../types/Weather.js";
+import { WeatherResponse } from '../types/Weather.js'
 
-export function parseCurrentWeather (data: WeatherResponse) {
+export function parseCurrentWeather(data: WeatherResponse) {
   return data
 }

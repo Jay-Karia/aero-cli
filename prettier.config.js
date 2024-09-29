@@ -6,6 +6,7 @@ const config = {
   tabWidth: 2,
   semi: false,
   singleQuote: true,
+  endOfLine: 'crlf',
 }
 
 export default config
