@@ -1,6 +1,6 @@
 import { Unit } from '../types/Unit.js'
 import chalk from 'chalk'
-import { apiUnitMap } from '../constants/index.js'
+import { API_UNIT_MAP } from '../constants/index.js'
 import { WeatherResponse } from '../types/Weather.js'
 import { parseCurrentWeather } from '../utils/parseData.js'
 
@@ -15,14 +15,6 @@ export async function currentWeather({
   unit,
   temperature,
 }: CurrentWeatherOptions) {
-  // Check if the location is provided
-  if (!location) {
-    console.error(
-      chalk.red('Error: Please provide a location with -l or --location.')
-    )
-    process.exit(1)
-  }
-
   // Check if the unit is valid
   if (unit && !['celsius', 'fahrenheit', 'c', 'f'].includes(unit)) {
     console.error(chalk.red('Error: Please provide a valid unit.'))
@@ -33,7 +25,7 @@ export async function currentWeather({
   // Map the unit to the API unit
   const parsedUnit =
     unit === 'f' ? 'fahrenheit' : unit === 'c' ? 'celsius' : unit
-  const apiUnit = apiUnitMap[parsedUnit]
+  const apiUnit = API_UNIT_MAP[parsedUnit]
 
   const API_KEY = process.env.API_KEY
   const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=${apiUnit}`
@@ -47,7 +39,7 @@ export async function currentWeather({
       process.exit(1)
     }
 
-    console.log(parseCurrentWeather(data, temperature))
+    console.log(parseCurrentWeather(data, parsedUnit, temperature))
   } catch {
     console.error(chalk.red('Error: Unable to fetch weather data.'))
   }

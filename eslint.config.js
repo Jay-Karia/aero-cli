@@ -16,7 +16,6 @@ export default [
       'no-undef-init': 'off',
       'no-unused-expressions': 'off',
       'no-unused-labels': 'off',
-      camelcase: 'error',
     },
   },
 ]

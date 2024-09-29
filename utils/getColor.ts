@@ -44,3 +44,17 @@ export function getWindColor(speed: number) {
 
   return chalk.hex(`#dedede`)
 }
+
+export function getRainColor(rain: number) {
+  if (rain > 10) return chalk.hex(`#1481c9`)
+  if (rain > 5) return chalk.hex(`#38afff`)
+
+  return chalk.hex(`#7dcbff`)
+}
+
+export function getPrecipitationColor(precipitation: number) {
+  if (precipitation > 10) return chalk.hex(`#1481c9`)
+  if (precipitation > 5) return chalk.hex(`#38afff`)
+
+  return chalk.hex(`#7dcbff`)
+}
