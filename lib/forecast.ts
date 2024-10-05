@@ -2,7 +2,7 @@ import chalk from 'chalk'
 import { getCoordinates } from '../utils/getCoordinates.js'
 import { fetchWeatherApi } from 'openmeteo'
 import { parseDailyForecast, parseHourlyForecast } from '../utils/parseData.js'
-import {getTimezone} from '../utils/getTimezone.js'
+import { getTimezone } from '../utils/getTimezone.js'
 
 type ForecastOptions = {
   location: string
@@ -17,7 +17,7 @@ export async function getForecast({
   unit,
   daily: dailyData,
   hourly: hourlyData,
-  days
+  days,
 }: ForecastOptions) {
   // Check if the unit is valid
   if (unit && !['celsius', 'fahrenheit', 'c', 'f'].includes(unit)) {
@@ -28,7 +28,9 @@ export async function getForecast({
 
   // check the days value
   if (days && (days < 1 || days > 7)) {
-    console.error(chalk.red('Error: Please provide a valid number of days (1 - 7).'))
+    console.error(
+      chalk.red('Error: Please provide a valid number of days (1 - 7).')
+    )
     process.exit(1)
   }
 
@@ -101,7 +103,7 @@ export async function getForecast({
       ],
       temperature_unit: parsedUnit,
       wind_speed_unit: 'ms',
-      timezone
+      timezone,
     }
 
     const url = 'https://api.open-meteo.com/v1/forecast'
@@ -130,6 +132,12 @@ export async function getForecast({
       },
     }
 
-    await parseHourlyForecast(weatherDataHourly.hourly, lat, lng, parsedUnit, days)
+    await parseHourlyForecast(
+      weatherDataHourly.hourly,
+      lat,
+      lng,
+      parsedUnit,
+      days
+    )
   }
 }

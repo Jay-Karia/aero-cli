@@ -6,7 +6,7 @@ type Props = {
   lng: number
 }
 
-export async function getTimezone({lat, lng} : Props) {
+export async function getTimezone({ lat, lng }: Props) {
   try {
     const response = opencage.geocode({ q: `${lat}, ${lng}` })
     const data = await response
