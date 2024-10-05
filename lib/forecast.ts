@@ -72,7 +72,8 @@ export async function getForecast({
     }
 
     await parseDailyForecast(weatherDataDaily.daily, lat, lng, parsedUnit)
-  } else if (hourlyData) {
+  }
+  if (hourlyData) {
     const hourlyParams = {
       latitude: lat,
       longitude: lng,
@@ -115,6 +116,6 @@ export async function getForecast({
       },
     }
 
-    await parseHourlyForecast(weatherDataHourly.hourly, lat, lng)
+    await parseHourlyForecast(weatherDataHourly.hourly, lat, lng, parsedUnit)
   }
 }

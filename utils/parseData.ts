@@ -81,10 +81,64 @@ export async function parseDailyForecast(
   }
 }
 
-export function parseHourlyForecast(
+export async function parseHourlyForecast(
   data: HourlyForecast,
   lat: number,
-  lng: number
+  lng: number,
+  unit: string
 ) {
-  return { data, lat, lng }
+  const { city, country } = (await getCity({ lat, lng })) as {
+    city: string
+    country: string
+  }
+
+  const location = `
+  ${chalk.bold('Hourly Forecast')} for ${chalk.green(city)}, ${country}
+  `
+
+  console.log(location)
+
+  for (let i = 0; i < data.time.length; i++) {
+    const date = new Date(data.time[i])
+    const day =
+      date.toLocaleDateString('en-US', { weekday: 'long' }) +
+      ', ' +
+      date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
+    const time = date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+    })
+
+    const temperature = getTemperatureColor(data.temperature2m[i])(
+      data.temperature2m[i].toFixed(0)
+    )
+    const precipitation =
+      getPrecipitationColor(data.precipitation[i])(
+        data.precipitation[i].toFixed(2)
+      ) + ' mm'
+    const rain = getRainColor(data.rain[i])(data.rain[i].toFixed(2)) + ' mm'
+    const windSpeed =
+      getWindColor(data.windSpeed10m[i])(data.windSpeed10m[i].toFixed(2)) +
+      ' m/s'
+    const weatherCode = data.weatherCode[i]
+    const weather =
+      getWeatherEmoji(WEATHER_CODE_MAP[weatherCode]) +
+      ' ' +
+      WEATHER_CODE_MAP[weatherCode]
+
+    if (i === 0 || date.getDate() !== new Date(data.time[i - 1]).getDate()) {
+      console.log(chalk.bold(day) + '\n')
+    }
+
+    console.log(chalk.bold(`${time}`))
+    console.log(
+      'Temperature:' + `${temperature} ${unit === 'celsius' ? '°C' : '°F'}`
+    )
+    console.log('Weather: ' + weather)
+    console.log('Precipitation: ' + precipitation)
+    console.log('Rain: ' + rain)
+    console.log('Wind Speed: ' + windSpeed)
+
+    console.log('\n---------------------------------------\n')
+  }
 }
