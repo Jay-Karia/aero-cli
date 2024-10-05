@@ -52,9 +52,10 @@ program
   )
   .option('-d, --daily', 'Daily forecast for the next 7 days')
   .option('-h, --hourly', 'Hourly forecast for the next 48 hours')
+  .option('--days <number>', 'Number of forecast days')
   .action((options) => {
-    const { location, unit, daily, hourly } = options
-    getForecast({ location, unit, daily, hourly })
+    const { location, unit, daily, hourly, days } = options
+    getForecast({ location, unit, daily, hourly, days })
   })
 
 program.parse(process.argv)

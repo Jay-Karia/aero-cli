@@ -2,12 +2,14 @@ import chalk from 'chalk'
 import { getCoordinates } from '../utils/getCoordinates.js'
 import { fetchWeatherApi } from 'openmeteo'
 import { parseDailyForecast, parseHourlyForecast } from '../utils/parseData.js'
+import {getTimezone} from '../utils/getTimezone.js'
 
 type ForecastOptions = {
   location: string
   unit: string
   daily?: boolean
   hourly?: boolean
+  days: number
 }
 
 export async function getForecast({
@@ -15,6 +17,7 @@ export async function getForecast({
   unit,
   daily: dailyData,
   hourly: hourlyData,
+  days
 }: ForecastOptions) {
   // Check if the unit is valid
   if (unit && !['celsius', 'fahrenheit', 'c', 'f'].includes(unit)) {
@@ -22,6 +25,13 @@ export async function getForecast({
     console.log(chalk.yellow('Valid units are: celsius, fahrenheit, c, f'))
     process.exit(1)
   }
+
+  // check the days value
+  if (days && (days < 1 || days > 7)) {
+    console.error(chalk.red('Error: Please provide a valid number of days (1 - 7).'))
+    process.exit(1)
+  }
+
   const parsedUnit =
     unit === 'f' ? 'fahrenheit' : unit === 'c' ? 'celsius' : unit
 
@@ -30,6 +40,8 @@ export async function getForecast({
     lat: number
     lng: number
   }
+
+  const timezone = await getTimezone({ lat, lng })
 
   if (dailyData) {
     const dailyParams = {
@@ -45,6 +57,7 @@ export async function getForecast({
       ],
       temperature_unit: parsedUnit,
       wind_speed_unit: 'ms',
+      timezone,
     }
     const url = 'https://api.open-meteo.com/v1/forecast'
     const responses = await fetchWeatherApi(url, dailyParams)
@@ -71,7 +84,7 @@ export async function getForecast({
       },
     }
 
-    await parseDailyForecast(weatherDataDaily.daily, lat, lng, parsedUnit)
+    await parseDailyForecast(weatherDataDaily.daily, lat, lng, parsedUnit, days)
   }
   if (hourlyData) {
     const hourlyParams = {
@@ -88,6 +101,7 @@ export async function getForecast({
       ],
       temperature_unit: parsedUnit,
       wind_speed_unit: 'ms',
+      timezone
     }
 
     const url = 'https://api.open-meteo.com/v1/forecast'
@@ -116,6 +130,6 @@ export async function getForecast({
       },
     }
 
-    await parseHourlyForecast(weatherDataHourly.hourly, lat, lng, parsedUnit)
+    await parseHourlyForecast(weatherDataHourly.hourly, lat, lng, parsedUnit, days)
   }
 }

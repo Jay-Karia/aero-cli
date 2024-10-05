@@ -44,7 +44,8 @@ export async function parseDailyForecast(
   data: DailyForecast,
   lat: number,
   lng: number,
-  unit: string
+  unit: string,
+  days: number
 ) {
   const { city, country } = (await getCity({ lat, lng })) as {
     city: string
@@ -57,7 +58,9 @@ export async function parseDailyForecast(
 
   console.log(location)
 
-  for (let i = 0; i < data.time.length; i++) {
+  const limit = days ? days : data.time.length
+
+  for (let i = 0; i < limit; i++) {
     const date = new Date(data.time[i])
     const day =
       date.toLocaleDateString('en-US', { weekday: 'long' }) +
@@ -85,7 +88,8 @@ export async function parseHourlyForecast(
   data: HourlyForecast,
   lat: number,
   lng: number,
-  unit: string
+  unit: string,
+  days: number
 ) {
   const { city, country } = (await getCity({ lat, lng })) as {
     city: string
@@ -98,7 +102,9 @@ export async function parseHourlyForecast(
 
   console.log(location)
 
-  for (let i = 0; i < data.time.length; i++) {
+  const limit = days ? days * 24 : data.time.length
+
+  for (let i = 0; i < limit; i++) {
     const date = new Date(data.time[i])
     const day =
       date.toLocaleDateString('en-US', { weekday: 'long' }) +
