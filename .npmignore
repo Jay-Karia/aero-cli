@@ -2,7 +2,6 @@ constants
 node_modules
 dist
 lib
-public
 types
 utils
 .env
