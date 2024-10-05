@@ -35,6 +35,11 @@ Link the package
 npm link --local
 ```
 
+Compile the TypeScript files
+```bash
+pnpm dev
+```
+
 Run the CLI
 ```bash
 aero
